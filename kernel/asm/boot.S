@@ -171,7 +171,10 @@ _reset_:
 .thumb_func
 .global _sys_tick_asm_
 _sys_tick_asm_:
-  bkpt
+  push {r0, lr}
+  bl systick_c_handler
+  pop {r0, lr}
+  bx lr
 
 .thumb_func
 .global _svc_asm_handler_
