@@ -25,7 +25,7 @@ static char digits[] = "0123456789abcdef";
 
 void uart_wrapper ( char c ) {
   uart_put_byte(c);
-  // uart_polling_put_byte( c );
+  //uart_polling_put_byte( c );
 
 }
 

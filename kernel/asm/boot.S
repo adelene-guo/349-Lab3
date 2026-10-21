@@ -66,7 +66,7 @@ ivt:
 .word   spin                /* 51 IRQ35 SPI1   */
 .word   spin                /* 52 IRQ36 SPI2   */
 .word   spin                /* 53 IRQ37 USART1 */
-.word   spin                /* 54 IRQ38 USART2 */
+.word   _uart_handler_                /* 54 IRQ38 USART2 */
 .word   spin                /* 55 IRQ39 USART3   */
 .word   spin                /* 56 IRQ40 EXTI15_10   */
 .word   spin                /* 57 IRQ41 RTCAlarm */
@@ -102,6 +102,14 @@ ivt:
 .thumb_func
 spin:
   bkpt
+
+.thumb_func
+.global _uart_handler_
+_uart_handler_:
+  push {r0, lr}
+  bl USART2_IRQHandler
+  pop {r0, lr}
+  bx lr
 
 .thumb_func
 _nmi_ :
