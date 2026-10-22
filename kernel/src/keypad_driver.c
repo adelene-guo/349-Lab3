@@ -2,6 +2,7 @@
 
 #include <gpio.h>
 #include <keypad_driver.h>
+#include <systick.h>
 
 /** @brief Keypad pins for 3 columns and 4 rows */
 #define KEYPAD_COL1_PORT GPIO_B
@@ -117,16 +118,16 @@ int read_row() {
     int row_pressed;
 
     if (gpio_read(gpio_portROW1, numROW1)){
-        for (int i=0; i < 15000; i++);
+        systick_delay(10); //debounce
         row_pressed = 1;
     } else if (gpio_read(gpio_portROW2, numROW2)){
-        for (int i=0; i < 15000; i++);
+        systick_delay(10); //debounce
         row_pressed = 2;
     } else if (gpio_read(gpio_portROW3, numROW3)){
-        for (int i=0; i < 15000; i++);
+        systick_delay(10); //debounce
         row_pressed = 3;
     } else if (gpio_read(gpio_portROW4, numROW4)){
-        for (int i=0; i < 15000; i++);
+        systick_delay(10); //debounce
         row_pressed = 4;
     } else {
         row_pressed = 0;
@@ -152,7 +153,7 @@ char keypad_read( ){
     gpio_clr(gpio_portCOL3, numCOL3);
     int row_pressed = read_row();
 
-    for (int i=0; i < 30000; i++);
+    systick_delay(10); //debounce
 
     int row_pressed_1;
     int row_pressed_2;
@@ -174,7 +175,7 @@ char keypad_read( ){
        } else if (row_pressed == 4){
           key_pressed = '*';
        }
-       for (int i=0; i < 30000; i++);
+       systick_delay(10); //debounce
        return key_pressed;
     }
 
@@ -195,7 +196,7 @@ char keypad_read( ){
        } else if (row_pressed_1 == 4){
           key_pressed = '0';
        }
-        for (int i=0; i < 30000; i++);
+        systick_delay(10); //debounce
         return key_pressed;
     }
 
@@ -216,6 +217,6 @@ char keypad_read( ){
           key_pressed = '#';
        }
     }
-    for (int i=0; i < 30000; i++);
+    systick_delay(10); //debounce
     return key_pressed;
 }

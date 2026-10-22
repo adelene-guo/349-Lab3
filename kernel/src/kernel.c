@@ -20,8 +20,9 @@
 int kernel_main( void ) {
   init_349(); // DO NOT REMOVE THIS LINE
   uart_init(USART_DIV);
-
   systick_init();
+
+  enter_user_mode();
 
   uint32_t next = systick_get_ticks() + 1000; // 1000ms = 1s
   while (1) {
