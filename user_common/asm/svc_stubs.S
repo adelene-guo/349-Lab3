@@ -20,31 +20,38 @@ _start:
 
 .global _sbrk
 _sbrk:
-  bkpt
+  svc SVC_SBRK
+  bx lr
 
 .global _write
 _write:
-  bkpt
+  svc SVC_WRITE
+  bx lr
 
 .global _close
 _close:
-  bkpt
+  svc SVC_CLOSE
+  bx lr
 
 .global _fstat
 _fstat:
-  bkpt
+  svc SVC_FSTAT
+  bx lr
 
 .global _isatty
 _isatty:
-  bkpt
+  svc SVC_ISATTY
+  bx lr
 
 .global _lseek
 _lseek:
-  bkpt
+  svc SVC_LSEEK
+  bx lr
 
 .global _read
 _read:
-  bkpt
+  svc SVC_READ
+  bx lr
 
 .global _gettimeofday
 _gettimeofday:
@@ -56,20 +63,25 @@ _times:
 
 .global _getpid
 _getpid:
-  bkpt
+  svc SVC_GET_PID
+  bx lr
 
 .global _kill
 _kill:
-  bkpt
+  svc SVC_KILL
+  bx lr
 
 .global _exit
 _exit:
-  bkpt
+  svc SVC_EXIT
+  bx lr
 
 .global servo_enable
 servo_enable:
-  bkpt
+  svc SVC_SERVO_ENABLE
+  bx lr
 
 .global servo_set
 servo_set:
-  bkpt
+  svc SVC_SERVO_SET
+  bx lr

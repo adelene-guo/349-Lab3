@@ -187,4 +187,5 @@ _sys_tick_asm_:
 .thumb_func
 .global _svc_asm_handler_
 _svc_asm_handler_:
-  bkpt
+  mrs r0, psp
+  b svc_c_handler

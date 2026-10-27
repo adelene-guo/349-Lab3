@@ -63,18 +63,9 @@ struct uart_reg_map {
 /** @brief TX interrupt enable bit */
 #define UART_CR1_TXEIE (1 << 7)
 
-
-/** @brief buffer capacity (power of 2) */
-#define UART_BUF_SIZE 64
-
 /** @brief mask for buffer size instead of modding */
 #define UART_BUF_MASK (UART_BUF_SIZE-1)
 
-typedef struct {
-  char data[UART_BUF_SIZE];
-  volatile uint32_t head;
-  volatile uint32_t tail;
-} buf_t;
 
 buf_t uart_tx_buf;
 buf_t uart_rx_buf;
@@ -96,6 +87,7 @@ char pop(buf_t *b) {
   uint32_t index = b->tail++ & UART_BUF_MASK; // increment tail and "mod"
   return b->data[index];
 }
+
 
 void uart_init(UNUSED int baud){
     struct rcc_reg_map *rcc = RCC_BASE;
@@ -202,5 +194,4 @@ void uart_flush(){
     USART2_TX_IRQHandler(); 
   }
   while (!(uart->SR & UART_SR_TC)){};
-  nvic_irq(UART2_IRQ, IRQ_ENABLE);
 }

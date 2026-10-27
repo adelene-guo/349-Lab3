@@ -13,6 +13,7 @@
 #include <systick.h>
 #include <uart_polling.h>
 #include <uart.h>
+#include <lcd_driver.h>
 
 /** @brief USARTDIV value */
 #define USART_DIV 0x8B
@@ -21,6 +22,9 @@ int kernel_main( void ) {
   init_349(); // DO NOT REMOVE THIS LINE
   uart_init(USART_DIV);
   systick_init();
+  lcd_driver_init();
+  lcd_clear();
+  systick_delay(1000);
 
   enter_user_mode();
 
