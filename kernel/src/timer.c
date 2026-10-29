@@ -96,15 +96,16 @@ void timer_clear_interrupt_bit(UNUSED int timer) {
   tim->sr &= ~TIM_SR_UIF;
 }
 
-int led_on;
-void TIM2_IRQHandler(void) {
-  timer_clear_interrupt_bit(2);
-  gpio_port gpio_portGreen = GPIO_A;
-  unsigned int numGreen    = 8;
-  led_on = !led_on;
-  if(led_on) gpio_set(gpio_portGreen, numGreen);
-  else gpio_clr(gpio_portGreen, numGreen);
-}
+// Interrupt handler for when testing timer with LED in section 10
+// int led_on;
+// void TIM2_IRQHandler(void) {
+//   timer_clear_interrupt_bit(2);
+//   gpio_port gpio_portGreen = GPIO_A;
+//   unsigned int numGreen    = 8;
+//   led_on = !led_on;
+//   if(led_on) gpio_set(gpio_portGreen, numGreen);
+//   else gpio_clr(gpio_portGreen, numGreen);
+// }
 
 void TIM3_IRQHandler(void) {
   timer_clear_interrupt_bit(3);
