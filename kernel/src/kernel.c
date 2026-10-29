@@ -16,6 +16,7 @@
 #include <lcd_driver.h>
 #include <gpio.h>
 #include <timer.h>
+#include <servok.h>
 
 /** @brief USARTDIV value */
 #define USART_DIV 0x8B
@@ -27,6 +28,26 @@ int kernel_main( void ) {
   // lcd_driver_init();
   // lcd_clear();
   systick_delay(1000);
+
+  // testing servo
+  servo_init();
+  sys_servo_enable(1, 1);
+  sys_servo_enable(2, 1);
+
+  while (1) {
+    sys_servo_set(1, 0);   
+    sys_servo_set(2, 180);
+    systick_delay(1500);
+
+    sys_servo_set(1, 90);  
+    sys_servo_set(2, 90);
+    systick_delay(1500);
+
+    sys_servo_set(1, 180); 
+    sys_servo_set(2, 0);
+    systick_delay(1500);
+  }
+
 
   //Initialize green LED
   gpio_port gpio_portGreen = GPIO_A;

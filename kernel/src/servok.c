@@ -15,8 +15,11 @@
 
 #define UNUSED __attribute__((unused))
 
+// D2
 #define SERVO1_PORT GPIO_A // pwm1
 #define SERVO1_PIN 10
+
+// D3
 #define SERVO2_PORT GPIO_B // pwm2
 #define SERVO2_PIN 3
 
