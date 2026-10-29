@@ -56,9 +56,9 @@ ivt:
 .word   spin                /* 41 IRQ25 TIM1_UP */
 .word   spin                /* 42 IRQ26 TIM1_TRG_COM */
 .word   spin                /* 43 IRQ27 TIM1_CC   */
-.word   spin                /* 44 IRQ28 TIM2   */
-.word   spin                /* 45 IRQ29 TIM3 */
-.word   spin                /* 46 IRQ30 TIM5 */
+.word   _tim2_handler_      /* 44 IRQ28 TIM2   */
+.word   _tim3_handler_      /* 45 IRQ29 TIM3 */
+.word   _tim4_handler_      /* 46 IRQ30 TIM4 */
 .word   spin                /* 47 IRQ31 I2C1_EV   */
 .word   spin                /* 48 IRQ32 I2C1_ER   */
 .word   spin                /* 49 IRQ33 I2C2_EV */
@@ -66,7 +66,7 @@ ivt:
 .word   spin                /* 51 IRQ35 SPI1   */
 .word   spin                /* 52 IRQ36 SPI2   */
 .word   spin                /* 53 IRQ37 USART1 */
-.word   _uart_handler_                /* 54 IRQ38 USART2 */
+.word   _uart_handler_      /* 54 IRQ38 USART2 */
 .word   spin                /* 55 IRQ39 USART3   */
 .word   spin                /* 56 IRQ40 EXTI15_10   */
 .word   spin                /* 57 IRQ41 RTCAlarm */
@@ -78,7 +78,7 @@ ivt:
 .word   spin                /* 63 IRQ47 RESERVED   */
 .word   spin                /* 64 IRQ48 RESERVED   */
 .word   spin                /* 65 IRQ49 RESERVED */
-.word   spin                /* 66 IRQ50 TIM5 */
+.word   _tim5_handler_      /* 66 IRQ50 TIM5 */
 .word   spin                /* 67 IRQ51 SPI3   */
 .word   spin                /* 68 IRQ52 UART4   */
 .word   spin                /* 69 IRQ53 UART5 */
@@ -108,6 +108,38 @@ spin:
 _uart_handler_:
   push {r0, lr}
   bl USART2_IRQHandler
+  pop {r0, lr}
+  bx lr
+
+.thumb_func
+.global _tim2_handler_
+_tim2_handler_:
+  push {r0, lr}
+  bl TIM2_IRQHandler
+  pop {r0, lr}
+  bx lr
+
+.thumb_func
+.global _tim3_handler_
+_tim3_handler_:
+  push {r0, lr}
+  bl TIM3_IRQHandler
+  pop {r0, lr}
+  bx lr
+
+.thumb_func
+.global _tim4_handler_
+_tim4_handler_:
+  push {r0, lr}
+  bl TIM4_IRQHandler
+  pop {r0, lr}
+  bx lr
+
+.thumb_func
+.global _tim5_handler_
+_tim5_handler_:
+  push {r0, lr}
+  bl TIM5_IRQHandler
   pop {r0, lr}
   bx lr
 
