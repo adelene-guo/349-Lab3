@@ -23,6 +23,7 @@
  */
 static char digits[] = "0123456789abcdef";
 
+/** @brief Documents uart wrapper. */
 void uart_wrapper ( char c ) {
   uart_put_byte(c);
   //uart_polling_put_byte( c );
@@ -70,10 +71,8 @@ static void printnumk( uint8_t base, uint32_t num ) {
 /**
  * @brief      A kernel printf() function for debugging the kernel
  *
- * @param      fmt        the format string
- * @param[in]  <unnamed>  variadic input
- *
- * @return     0 on success or -1 on failure
+ * @param[in]  fmt  printf-style format string
+ * @param[in]  ...  values consumed by conversion specifiers in fmt
  */
 int printk( const char *fmt, ... ) {
   va_list args;

@@ -15,6 +15,7 @@
 #include <gpio.h>
 #include <systick.h>
 
+/** @brief Documents UNUSED. */
 #define UNUSED __attribute__((unused))
 
 /** @brief enable bit for update generation */
@@ -50,6 +51,7 @@ struct tim2_5 {
   volatile uint32_t or; /**< 50 Option Register */
 };
 
+/** @brief Documents timer base[]. */
 struct tim2_5* const timer_base[] = {(void *)0x0,   // N/A - Don't fill out
                                      (void *)0x0,   // N/A - Don't fill out
                                      (void *)0x40000000,    // TODO: fill out address for TIMER 2
@@ -58,9 +60,11 @@ struct tim2_5* const timer_base[] = {(void *)0x0,   // N/A - Don't fill out
                                      (void *)0x40000C00};   // TODO: fill out address for TIMER 5
 
 
+/** @brief Documents timer irqn[]. */
 int timer_irqn[] = {0, 0, 28, 29, 30, 50};
 
 
+/** @brief Documents timer init. */
 void timer_init(UNUSED int timer, UNUSED uint32_t prescalar, UNUSED uint32_t period) {
   if (timer<2 || timer>5) return;
 
@@ -78,6 +82,7 @@ void timer_init(UNUSED int timer, UNUSED uint32_t prescalar, UNUSED uint32_t per
   tim->cr1 |= TIM_CR1_CEN; // enable counter
 }
 
+/** @brief Documents timer disable. */
 void timer_disable(UNUSED int timer) {
   if (timer<2 || timer>5) return;
 
@@ -89,6 +94,7 @@ void timer_disable(UNUSED int timer) {
   rcc->apb1_enr &= ~(1 << (timer-2)); // disable RCC for appropriate timer
 }
 
+/** @brief Documents timer clear interrupt bit. */
 void timer_clear_interrupt_bit(UNUSED int timer) {
   if (timer<2 || timer>5) return;
 
@@ -107,14 +113,17 @@ void timer_clear_interrupt_bit(UNUSED int timer) {
 //   else gpio_clr(gpio_portGreen, numGreen);
 // }
 
+/** @brief Documents TIM3 IRQHandler. */
 void TIM3_IRQHandler(void) {
   timer_clear_interrupt_bit(3);
 }
 
+/** @brief Documents TIM4 IRQHandler. */
 void TIM4_IRQHandler(void) {
   timer_clear_interrupt_bit(4);
 }
 
+/** @brief Documents TIM5 IRQHandler. */
 void TIM5_IRQHandler(void) {
   timer_clear_interrupt_bit(5);
 }

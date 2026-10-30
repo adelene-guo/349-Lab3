@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <systick.h>
 
+/** @brief Documents UNUSED. */
 #define UNUSED __attribute__((unused))
 
 /** @brief The SysTick register map. */
@@ -42,6 +43,7 @@ struct systick_reg_map {
 /** @brief Global counter of ticks since boot*/
 volatile uint32_t systick_ticks = 0;
 
+/** @brief Documents systick init. */
 void systick_init() {
     struct systick_reg_map *systick = SYSTICK_BASE;
 
@@ -52,16 +54,19 @@ void systick_init() {
     systick->STK_CTRL |= ENABLE; //load reload val and start timer
 }
 
+/** @brief Documents systick delay. */
 void systick_delay(uint32_t ticks) {
     uint32_t start = systick_get_ticks();
     
     while (systick_get_ticks() - start < ticks); //wait for ticks to pass
 }
 
+/** @brief Documents systick get ticks. */
 uint32_t systick_get_ticks() {
     return systick_ticks; //return global tick counter
 }
 
+/** @brief Documents systick c handler. */
 void systick_c_handler() {
     systick_ticks++; //increment global tick counter
 }

@@ -13,14 +13,19 @@
 #include <stdint.h>
 
 /* @brief Configuration and Control Register */
+/** @brief Documents CCR. */
 #define CCR ((volatile uint32_t *) 0xE000ED14)
 /* @brief Refister to enable/disable fpu */
+/** @brief Documents CPACR. */
 #define CPACR ((volatile uint32_t *) 0xE000ED88)
 /* @brief FPU control data */
+/** @brief Documents FPCCR. */
 #define FPCCR ((volatile uint32_t *) 0xE000EF34)
 /* @brief Interrupt COntrl and State Register */
+/** @brief Documents ICSR. */
 #define ICSR ((volatile uint32_t *) 0xE000ED04)
 
+/** @brief Documents SHPR2. */
 #define SHPR2 ((volatile uint32_t *) 0xE000ED1C)
 
 /**

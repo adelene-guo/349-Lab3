@@ -15,8 +15,10 @@
 #include <svc_num.h>
 
 
+/** @brief Documents UNUSED. */
 #define UNUSED __attribute__((unused))
 
+/** @brief Documents svc c handler. */
 void svc_c_handler(uint32_t *psp) {
   uint8_t *svc_instr = (uint8_t *)psp[6] - 2;   // address of the svc instruction
   uint8_t svc_num = svc_instr[0];               // low byte of the halfword = immediate

@@ -20,7 +20,7 @@
  * @brief      Linked list struture to track free blocks.
  */
 typedef struct list_node{
-  struct list_node* next;
+  struct list_node* next; /**< Next node in the free-block list. */
 }list_node;
 
 /**
@@ -28,21 +28,25 @@ typedef struct list_node{
  *             whether you have done any unaligned alocations.
  */
 typedef struct kmalloc_t {
-  list_node* free_node;
+  list_node* free_node; /**< Head of the free-block list. */
   /* You might want to add some other things here */
 }kmalloc_t;
 
+/** @brief Documents k malloc init. */
 void k_malloc_init( kmalloc_t* internals,
                    char* heap_low,
                    char* heap_top,
                    uint32_t stack_size,
                    uint32_t unaligned );
 
+/** @brief Documents k malloc unaligned. */
 void* k_malloc_unaligned( kmalloc_t* internals,
                           uint32_t size );
 
+/** @brief Documents k malloc aligned. */
 void* k_malloc_aligned( kmalloc_t* internals );
 
+/** @brief Documents k free. */
 void k_free( kmalloc_t* internals, void* buffer );
 
 #endif /* _KMALLOC_H_ */

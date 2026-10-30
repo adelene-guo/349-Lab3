@@ -21,6 +21,7 @@
 /** @brief USARTDIV value */
 #define USART_DIV 0x8B
 
+/** @brief Documents kernel main. */
 int kernel_main( void ) {
   init_349(); // DO NOT REMOVE THIS LINE
   uart_init(USART_DIV);

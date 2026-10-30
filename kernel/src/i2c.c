@@ -155,6 +155,7 @@ int i2c_master_write(uint8_t *buf, uint16_t len, uint8_t slave_addr){
     return 0;
 }
 
+/** @brief Documents i2c master read. */
 int i2c_master_read(uint8_t *buf, uint16_t len, uint8_t slave_addr){
     (void) buf;
     (void) len;

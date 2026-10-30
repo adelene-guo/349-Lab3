@@ -9,6 +9,7 @@
 #ifndef _ARM_H_
 #define _ARM_H_
 
+/** @brief Documents intrinsic. */
 #define intrinsic __attribute__( ( always_inline ) ) static inline
 
 #include <stdint.h>

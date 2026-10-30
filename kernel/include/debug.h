@@ -57,7 +57,9 @@
  */
 //{@
 #define ASSERT( ... ) do {} while( 0 );
+/** @brief Documents DEBUG PRINT. */
 #define DEBUG_PRINT( ... ) do {} while( 0 );
+/** @brief Documents WARN. */
 #define WARN( ... ) do {} while( 0 );
 //@}
 

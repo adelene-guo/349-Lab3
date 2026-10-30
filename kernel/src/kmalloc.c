@@ -27,6 +27,7 @@
 #include <debug.h>
 #include <unistd.h>
 
+/** @brief Documents UNUSED. */
 #define UNUSED __attribute__((unused))
 
 /**
@@ -36,11 +37,10 @@
  * @param[in]  heap_low         The heap low
  * @param[in]  heap_top         The heap top
  * @param[in]  stack_size       The stack size
- * @param[in]  unaligned_alloc  This flags sets whether you can perfrom
+ * @param[in]  unaligned  This flag sets whether you can perform
  *                              unaligned allocations. If this flag is set,
  *                              then the stack size variable is ignored.
  *
- * @return     Returns 0 if allocation was successful, or -1 otherwise.
  */
 void k_malloc_init( UNUSED kmalloc_t* internals,
                     UNUSED char* heap_low,
@@ -55,7 +55,7 @@ void k_malloc_init( UNUSED kmalloc_t* internals,
  *             unaligned flag has not be set, you should fall into a
  *             breakpoint look at debug.h to see how to do this.
  *
- * @param[in]  kmalloc_t  The kmalloc t
+ * @param[in]  internals  Allocator state.
  * @param[in]  size       The allocation size.
  *
  * @return     Returns the pointer to the allocated buffer.

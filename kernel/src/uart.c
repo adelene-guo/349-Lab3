@@ -17,6 +17,7 @@
 #include <gpio.h>
 
 
+/** @brief Documents UNUSED. */
 #define UNUSED __attribute__((unused))
 
 /** @brief The UART register map. */
@@ -67,28 +68,35 @@ struct uart_reg_map {
 #define UART_BUF_MASK (UART_BUF_SIZE-1)
 
 
+/** @brief Documents uart tx buf. */
 buf_t uart_tx_buf;
+/** @brief Documents uart rx buf. */
 buf_t uart_rx_buf;
 
+/** @brief Documents empty. */
 int empty(buf_t *b) {
   return b->head == b->tail;
 }
 
+/** @brief Documents full. */
 int full(buf_t *b) {
   return b->head - b->tail == UART_BUF_SIZE;
 }
 
+/** @brief Documents push. */
 void push(buf_t *b, char c) {
   uint32_t index = b->head++ & UART_BUF_MASK; // inrement head and "mod"
   b->data[index] = c;
 }
 
+/** @brief Documents pop. */
 char pop(buf_t *b) {
   uint32_t index = b->tail++ & UART_BUF_MASK; // increment tail and "mod"
   return b->data[index];
 }
 
 
+/** @brief Documents uart init. */
 void uart_init(UNUSED int baud){
     struct rcc_reg_map *rcc = RCC_BASE;
     rcc->apb1_enr |= RCC_EN;
@@ -124,6 +132,7 @@ void uart_init(UNUSED int baud){
     return;
 }
 
+/** @brief Documents uart put byte. */
 int uart_put_byte(UNUSED char c){
   struct uart_reg_map *uart = UART2_BASE;
   int success = -1;
@@ -139,6 +148,7 @@ int uart_put_byte(UNUSED char c){
   return success;
 }
 
+/** @brief Documents uart get byte. */
 int uart_get_byte(UNUSED char *c){
   struct uart_reg_map *uart = UART2_BASE;
   int success = -1;
@@ -154,6 +164,7 @@ int uart_get_byte(UNUSED char *c){
   return success;
 }
 
+/** @brief Documents USART2 TX IRQHandler. */
 void USART2_TX_IRQHandler() {
   struct uart_reg_map *uart = UART2_BASE;
   uart->DR = pop(&uart_tx_buf);
@@ -162,6 +173,7 @@ void USART2_TX_IRQHandler() {
   }
 }
 
+/** @brief Documents USART2 RX IRQHandler. */
 void USART2_RX_IRQHandler() {
   struct uart_reg_map *uart = UART2_BASE;
   push(&uart_rx_buf, uart->DR);
@@ -170,6 +182,7 @@ void USART2_RX_IRQHandler() {
   }
 }
 
+/** @brief Documents USART2 IRQHandler. */
 void USART2_IRQHandler(){
   struct uart_reg_map *uart = UART2_BASE;
   uint32_t rxne = uart->SR & UART_SR_RXNE;
@@ -186,6 +199,7 @@ void USART2_IRQHandler(){
   nvic_clear_pending(UART2_IRQ);
 }
 
+/** @brief Documents uart flush. */
 void uart_flush(){
   struct uart_reg_map *uart = UART2_BASE;
   nvic_irq(UART2_IRQ, IRQ_DISABLE);

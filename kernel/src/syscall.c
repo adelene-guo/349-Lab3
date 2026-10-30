@@ -18,10 +18,13 @@
 #include <string.h>
 #include <stdio.h>
 
+/** @brief Documents heap low[]. */
 extern char __heap_low[];
+/** @brief Documents heap top[]. */
 extern char __heap_top[];
 static char *heap_ptr = (char *)&__heap_low;
 
+/** @brief Documents UNUSED. */
 #define UNUSED __attribute__((unused))
 /**
  * @brief transmits one byte
@@ -30,6 +33,7 @@ static void echo_byte(char c) {
   while (uart_put_byte(c) != 0) {}
 }
 
+/** @brief Documents sys sbrk. */
 void *sys_sbrk(UNUSED int incr){
 
   if (heap_ptr + incr > (char *)&__heap_top
@@ -41,6 +45,7 @@ void *sys_sbrk(UNUSED int incr){
   return (void *)old_ptr;
 }
 
+/** @brief Documents sys write. */
 int sys_write(UNUSED int file, UNUSED char *ptr, UNUSED int len){
   if (file != 1) return -1; // if output is not stdout, return -1
   for (int i = 0; i < len; i++) {
@@ -49,6 +54,7 @@ int sys_write(UNUSED int file, UNUSED char *ptr, UNUSED int len){
   return len;
 }
 
+/** @brief Documents sys read. */
 int sys_read(UNUSED int file, UNUSED char *ptr, UNUSED int len){
   static bool skip_lf = false; //true right after a '\r', so the '\n' of "\r\n" is ignored
 
@@ -87,6 +93,7 @@ int sys_read(UNUSED int file, UNUSED char *ptr, UNUSED int len){
   return len;
 }
 
+/** @brief Documents sys exit. */
 void sys_exit(UNUSED int status){
   char status_msg[256];
   snprintf(status_msg, sizeof(status_msg), "%s%d", "Exited status: ", status);
