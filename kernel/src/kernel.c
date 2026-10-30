@@ -25,9 +25,9 @@ int kernel_main( void ) {
   init_349(); // DO NOT REMOVE THIS LINE
   uart_init(USART_DIV);
   systick_init();
-  // lcd_driver_init();
-  // lcd_clear();
-  // systick_delay(1000);
+  lcd_driver_init();
+  lcd_clear();
+  systick_delay(1000);
   servo_init();
   enter_user_mode();
 
