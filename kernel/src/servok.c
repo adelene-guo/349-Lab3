@@ -1,11 +1,11 @@
 /**
- * @file 
+ * @file servok.c
  *
- * @brief      
+ * @brief This file contains the implementation of the servo driver for the STM32F4 microcontroller. It provides functions to initialize the servo and control its position.   
  *
- * @date       
+ * @date October 30, 2026       
  *
- * @author     
+ * @author Alexis and Adie    
  */
 
 #include <unistd.h>
@@ -21,7 +21,7 @@
 
 // D3
 #define SERVO2_PORT GPIO_B // pwm2
-#define SERVO2_PIN 3
+#define SERVO2_PIN 10
 
 #define SERVO_TIMER 2
 #define SERVO_PRESCALAR 16 // 16MHz/16 = 1MHz --> 1us time units

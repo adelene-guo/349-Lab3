@@ -1,11 +1,11 @@
 /**
  * @file syscall.c
  *
- * @brief      
+ * @brief This file contains the implementation of the system call interface for the STM32F4 microcontroller.    
  *
- * @date       
+ * @date October 30, 2026      
  *
- * @author     
+ * @author Adie and Alexis    
  */
 
 #include <unistd.h>
